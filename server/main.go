@@ -64,7 +64,13 @@ func main() {
 
 	r := gin.Default()
 
-	// Routes
+	r.GET("/health", func(c *gin.Context) {
+        c.JSON(http.StatusOK, gin.H{
+            "status":  "🚀 Rocket go! API is running",
+            "version": "1.0.0",
+            "time":    time.Now().UTC().Format(time.RFC3339),
+        })
+    })
 	r.GET("/todos", getTodos)
 	r.GET("/todos/:id", getTodo)
 	r.POST("/todos", createTodo)
@@ -76,7 +82,7 @@ func main() {
 		port = "8080"
 	}
 
-	log.Printf("Server running on port %s", port)
+	log.Printf("Server running on port %s!", port)
 	log.Fatal(r.Run(":" + port))
 }
 
