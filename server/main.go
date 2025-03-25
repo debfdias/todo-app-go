@@ -58,6 +58,10 @@ func initDB() {
 func main() {
 	initDB()
 
+	if mode := os.Getenv("GIN_MODE"); mode != "" {
+		gin.SetMode(mode)
+	}
+
 	r := gin.Default()
 
 	// Routes
